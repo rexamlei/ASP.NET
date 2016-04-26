@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-public partial class Default2 : System.Web.UI.Page
+public partial class ProDataList : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
