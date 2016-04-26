@@ -1,4 +1,4 @@
-
+ 
 CREATE PROCEDURE getdetail 
 (
 @id int,@title nvarchar(50) output
