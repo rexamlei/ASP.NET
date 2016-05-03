@@ -13,6 +13,7 @@ public class SqlHelper
     SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["SmartConnectionString"].ToString());
     SqlDataReader sdr;
 
+
     public SqlHelper()
     {
         //
