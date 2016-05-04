@@ -242,6 +242,15 @@ IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo
 ALTER TABLE [dbo].[T_Ware]  WITH CHECK ADD FOREIGN KEY([DetailsType_ID])
 REFERENCES [dbo].[T_DetailsType] ([DTID])
 
+CREATE PROCEDURE QueryCustomer 
+(@c_account nvarchar(50),@c_pwd nvarchar(50))
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT customer_id from T_Customer where customer_account=@c_account and customer_pwd=@c_pwd;
+END
+GO
+
 insert into T_Level1 values('家用电器','1')
 insert into T_Level2 values('生活电器','1','1')
 insert into T_Level3 values('扫地机器人','1','1','1')
