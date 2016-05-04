@@ -96,3 +96,12 @@ alter table  T_Order add  unique (Order_number)
 alter table  T_Ware  add  unique  (Ware_number)
  
 
+--创建视图
+create view v_waredetails
+as
+select Ware_ID,Ware_Number,Ware_Stock,
+Ware_Name,Ware_Weight,Ware_Price,Ware_Image,
+Level3_Name,Level2_Name
+from T_Level3 inner join 
+T_Level2 on T_Level3.Level2_ID=T_Level2.Level2_ID inner join
+T_Ware on T_Level3.Level3_ID=T_Ware.Ware_Level3
