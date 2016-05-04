@@ -253,7 +253,7 @@ GO
 
 insert into T_Level1 values('家用电器','1')
 insert into T_Level2 values('生活电器','1','1')
-insert into T_Level3 values('扫地机器人','1','1','1')
+insert into T_Level3 values('机器人','1','1','1')
 insert into T_DetailsType values('电器','日用电器','在生活中帮助你')
 insert into T_Ware values('1001','小巧机器人','台',58,1,1108,null,'~/image/01.jpg',1)
 insert into T_Ware values('1002','扫地机器人','台',158,1,89,null,'~/image/02.jpg',1)
