@@ -56,6 +56,11 @@ public class SqlHelper
         if (con.State == ConnectionState.Closed)
             con.Close();
     }
+        public void closeReader()
+    {
+        if (sdr != null)
+            sdr.Close();
+    }
     public bool ExeNonQueryProc(String cmdName,SqlParameter[] ps)
     {
         if (con.State == ConnectionState.Closed)
