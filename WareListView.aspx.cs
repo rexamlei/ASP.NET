@@ -102,13 +102,13 @@ public partial class Shop_WareListView : System.Web.UI.Page
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        ImageButton btn = (ImageButton)sender;
-        string Ware_id = btn.CommandArgument;
-        DataListItem item = (DataListItem)btn.NamingContainer;
-        int index = item.ItemIndex;
-        Label lblNum = (Label)DataList1.Items[index].FindControl("Label1");
+        ImageButton btn = (ImageButton)sender;//获取按钮对象
+        string Ware_id = btn.CommandArgument; //把该按钮的CommandArgument对应的值赋给Ware_id变量
+        DataListItem item = (DataListItem)btn.NamingContainer;  //找到该按钮所在的容器即得到DataListItem对象
+        int index = item.ItemIndex;                             //获取DataListItem对象的索引
+        Label lblNum = (Label)DataList1.Items[index].FindControl("Label1");//获得DataList1.Items的Label1对象
         string addr = "~/Shop/shoppingCart2.aspx?wid={0}&wnum={1}";
-        addr = string.Format(addr, Ware_id, lblNum.Text);
+        addr = string.Format(addr, Ware_id, lblNum.Text);       //把商品id和编码通过url传递到目标地址
         Response.Redirect(addr);
 
     }
