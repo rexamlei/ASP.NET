@@ -267,3 +267,13 @@ BEGIN
 	SELECT customer_id from T_Customer where customer_account=@c_account and customer_pwd=@c_pwd;
 END
 GO
+
+--存储过程2
+CREATE PROCEDURE sq_select2_id 
+	@Ware_ID int
+as
+BEGIN
+	SET NOCOUNT ON;
+   select * from T_Ware where Ware_ID=@Ware_ID 
+END
+GO
