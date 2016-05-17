@@ -19,18 +19,17 @@ public partial class Shop_ShoppingCart2 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            try
+            if (Request.QueryString["wid"] != null)
             {
                 ID = Convert.ToInt32(Request.QueryString["wid"].ToString());
-                ProductNO = Request.QueryString["wnum"].ToString();
-                BindList();
             }
-            catch (Exception ee)
+
+            if (Request.QueryString["wnum"] != null)
             {
-                //错误后将要转入指定页面
-                //Response.Redirect("index.aspx");
-                //Response.Write(ee);
+                ProductNO = Request.QueryString["wnum"].ToString();
             }
+
+            BindList();
         }
     }
 
