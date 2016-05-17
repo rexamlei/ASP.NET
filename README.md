@@ -3,3 +3,12 @@
 该项目使用了ASP.NET技术和MSSQL数据库<br> 
 Welcome to my ASP.NET project, here is an electronic mall B2C project source code page.
 
+### 代码说明
+Smart.sql       数据库导入文件<br>
+SqlHelper.cs    数据库助手类<br>
+CheckCode.cs    验证码生成类<br>
+WareListView：  商品展示页面<br>
+ShoppingCart2： 购物车页<br>
+Order：         订单页面<br>
+ProDataList：   带输入参数和输出参数实例<br>
+DataListPaging：分页实例<br> 
