@@ -1,3 +1,41 @@
+USE
+Smart
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_CustomerAddress]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[T_CustomerAddress](
+	[CustomerAddress_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Customer_ID] [int] NOT NULL,
+	[Customer_Address] [nvarchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CustomerAddress_ID] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_DetailsType]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[T_DetailsType](
+	[DTID] [int] IDENTITY(1,1) NOT NULL,
+	[DTName] [nvarchar](50) NOT NULL,
+	[DTTableName] [nvarchar](50) NOT NULL,
+	[DTBeizu] [nvarchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DTID] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,11 +49,11 @@ CREATE TABLE [dbo].[T_Level1](
 PRIMARY KEY CLUSTERED 
 (
 	[Level1_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
 UNIQUE NONCLUSTERED 
 (
 	[Level1_Name] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
@@ -35,115 +73,15 @@ CREATE TABLE [dbo].[T_Customer](
 PRIMARY KEY CLUSTERED 
 (
 	[Customer_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Customer_Phone] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
 UNIQUE NONCLUSTERED 
 (
 	[Customer_Email] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_CustomerAddress]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[T_CustomerAddress](
-	[CustomerAddress_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Customer_ID] [int] NOT NULL,
-	[Customer_Address] [nvarchar](50) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[CustomerAddress_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_DetailsType]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[T_DetailsType](
-	[DTID] [int] IDENTITY(1,1) NOT NULL,
-	[DTName] [nvarchar](50) NOT NULL,
-	[DTTableName] [nvarchar](50) NOT NULL,
-	[DTBeizu] [nvarchar](50) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[DTID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_Level2]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[T_Level2](
-	[Level2_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Level2_Name] [nvarchar](50) NOT NULL,
-	[Level2_Desc] [nvarchar](500) NULL,
-	[Level1_ID] [int] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[Level2_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
 UNIQUE NONCLUSTERED 
 (
-	[Level2_Name] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_Level3]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[T_Level3](
-	[Level3_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Level3_Name] [nvarchar](50) NOT NULL,
-	[Level3_Desc] [nvarchar](500) NULL,
-	[Level2_ID] [int] NULL,
-	[Level1_ID] [int] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[Level3_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Level3_Name] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_ShoppingCart]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [dbo].[T_ShoppingCart](
-	[ShoppingItem_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Customer_ID] [int] NOT NULL,
-	[Ware_ID] [int] NOT NULL,
-	[Ware_Qty] [int] NOT NULL,
-	[Ware_Sum] [float] NULL,
-	[Order_ID] [int] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[ShoppingItem_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+	[Customer_Phone] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
@@ -156,19 +94,20 @@ BEGIN
 CREATE TABLE [dbo].[T_Order](
 	[Order_ID] [int] IDENTITY(1,1) NOT NULL,
 	[Order_number] [nchar](10) NOT NULL,
+	[Customer_ID] [int] NOT NULL,
 	[CustomerAddress_ID] [int] NOT NULL,
 	[Pay_from] [nchar](10) NOT NULL,
 	[Is_send] [bit] NULL,
 	[Is_pay] [bit] NULL,
 	[Pay_time] [datetime] NOT NULL,
-PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK__T_Order__0EA330E9] PRIMARY KEY CLUSTERED 
 (
 	[Order_ID] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ__T_Order__0F975522] UNIQUE NONCLUSTERED 
 (
 	[Order_number] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
@@ -192,11 +131,76 @@ CREATE TABLE [dbo].[T_Ware](
 PRIMARY KEY CLUSTERED 
 (
 	[Ware_id] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
 UNIQUE NONCLUSTERED 
 (
 	[Ware_number] ASC
-)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_Level3]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[T_Level3](
+	[Level3_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Level3_Name] [nvarchar](50) NOT NULL,
+	[Level3_Desc] [nvarchar](500) NULL,
+	[Level2_ID] [int] NULL,
+	[Level1_ID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Level3_ID] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Level3_Name] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_ShoppingCart]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[T_ShoppingCart](
+	[ShoppingItem_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Customer_ID] [int] NOT NULL,
+	[Ware_ID] [int] NOT NULL,
+	[Ware_Qty] [int] NOT NULL,
+	[Ware_Sum] [float] NULL,
+	[Order_ID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ShoppingItem_ID] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[T_Level2]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[T_Level2](
+	[Level2_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Level2_Name] [nvarchar](50) NOT NULL,
+	[Level2_Desc] [nvarchar](500) NULL,
+	[Level1_ID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Level2_ID] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Level2_Name] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
@@ -214,35 +218,70 @@ from T_Level3 inner join
 T_Level2 on T_Level3.Level2_ID=T_Level2.Level2_ID inner join
 T_Ware on T_Level3.Level3_ID=T_Ware.Ware_Level3' 
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level2__Level2__0CBAE877]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level2]'))
-ALTER TABLE [dbo].[T_Level2]  WITH CHECK ADD FOREIGN KEY([Level2_ID])
-REFERENCES [dbo].[T_Level1] ([Level1_ID])
+SET ANSI_NULLS ON
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level3__Level1__0EA330E9]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level3]'))
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sq_select2_id]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'--存储过程2
+CREATE PROCEDURE [dbo].[sq_select2_id] 
+	@Ware_ID int
+as
+BEGIN
+	SET NOCOUNT ON;
+   select * from T_Ware where Ware_ID=@Ware_ID 
+END
+' 
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[QueryCustomer]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[QueryCustomer] 
+(@c_account nvarchar(50),@c_pwd nvarchar(50))
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT customer_id from T_Customer where customer_account=@c_account and customer_pwd=@c_pwd;
+END
+' 
+END
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Order__Custome__1920BF5C]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Order]'))
+ALTER TABLE [dbo].[T_Order]  WITH CHECK ADD  CONSTRAINT [FK__T_Order__Custome__1920BF5C] FOREIGN KEY([CustomerAddress_ID])
+REFERENCES [dbo].[T_CustomerAddress] ([CustomerAddress_ID])
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_T_Order_T_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Order]'))
+ALTER TABLE [dbo].[T_Order]  WITH CHECK ADD  CONSTRAINT [FK_T_Order_T_Customer] FOREIGN KEY([Customer_ID])
+REFERENCES [dbo].[T_Customer] ([Customer_ID])
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Ware__DetailsT__1A14E395]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Ware]'))
+ALTER TABLE [dbo].[T_Ware]  WITH CHECK ADD FOREIGN KEY([DetailsType_ID])
+REFERENCES [dbo].[T_DetailsType] ([DTID])
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level3__Level1__15502E78]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level3]'))
 ALTER TABLE [dbo].[T_Level3]  WITH CHECK ADD FOREIGN KEY([Level1_ID])
 REFERENCES [dbo].[T_Level1] ([Level1_ID])
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level3__Level2__0DAF0CB0]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level3]'))
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level3__Level2__164452B1]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level3]'))
 ALTER TABLE [dbo].[T_Level3]  WITH CHECK ADD FOREIGN KEY([Level2_ID])
 REFERENCES [dbo].[T_Level2] ([Level2_ID])
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Shoppin__Custo__108B795B]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_ShoppingCart]'))
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Shoppin__Custo__173876EA]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_ShoppingCart]'))
 ALTER TABLE [dbo].[T_ShoppingCart]  WITH CHECK ADD FOREIGN KEY([Customer_ID])
 REFERENCES [dbo].[T_Customer] ([Customer_ID])
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Shoppin__Order__117F9D94]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_ShoppingCart]'))
-ALTER TABLE [dbo].[T_ShoppingCart]  WITH CHECK ADD FOREIGN KEY([Order_ID])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Shoppin__Order__182C9B23]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_ShoppingCart]'))
+ALTER TABLE [dbo].[T_ShoppingCart]  WITH CHECK ADD  CONSTRAINT [FK__T_Shoppin__Order__182C9B23] FOREIGN KEY([Order_ID])
 REFERENCES [dbo].[T_Order] ([Order_ID])
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Order__Custome__0F975522]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Order]'))
-ALTER TABLE [dbo].[T_Order]  WITH CHECK ADD FOREIGN KEY([CustomerAddress_ID])
-REFERENCES [dbo].[T_CustomerAddress] ([CustomerAddress_ID])
-GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Ware__DetailsT__1273C1CD]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Ware]'))
-ALTER TABLE [dbo].[T_Ware]  WITH CHECK ADD FOREIGN KEY([DetailsType_ID])
-REFERENCES [dbo].[T_DetailsType] ([DTID])
-
-
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level2__Level2__145C0A3F]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level2]'))
+ALTER TABLE [dbo].[T_Level2]  WITH CHECK ADD FOREIGN KEY([Level2_ID])
+REFERENCES [dbo].[T_Level1] ([Level1_ID])
 
 insert into T_Level1 values('家用电器','1')
 insert into T_Level2 values('生活电器','1','1')
@@ -257,23 +296,3 @@ insert into T_Ware values('1006','机器人聊天','台',22,1,99,null,'~/image/0
 insert into T_Ware values('1007','机器人学习','台',67,1,9888,null,'~/image/07.jpg',1)
 insert into T_Ware values('1008','跑步小巧机','台',10,1,53,null,'~/image/02.jpg',1)
 insert into T_Ware values('1009','宝塔机器人','台',2,1,128,null,'~/image/05.jpg',1)
-
---存储过程
-CREATE PROCEDURE QueryCustomer 
-(@c_account nvarchar(50),@c_pwd nvarchar(50))
-AS
-BEGIN
-	SET NOCOUNT ON;
-	SELECT customer_id from T_Customer where customer_account=@c_account and customer_pwd=@c_pwd;
-END
-GO
-
---存储过程2
-CREATE PROCEDURE sq_select2_id 
-	@Ware_ID int
-as
-BEGIN
-	SET NOCOUNT ON;
-   select * from T_Ware where Ware_ID=@Ware_ID 
-END
-GO
