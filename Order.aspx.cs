@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Data;
 using System.Data.SqlClient;
@@ -54,24 +50,31 @@ public partial class Shop_Order : System.Web.UI.Page
     {
         try
         {
-            string sql = string.Format("select customer_id from t_Customer where Customer_Account='{0}'", lblUser.Text);
-            SqlDataReader sdr = sh.QueryOperation(sql);
-            int customerid = -1;
-            if (sdr.HasRows)
+            if (!string.IsNullOrEmpty(TextBox1.Text.Trim()))
             {
-                sdr.Read();
-                customerid = sdr.GetInt32(0);
-            }
-            sdr.Close();//关闭SqlDataReader对象
+                string sql = string.Format("select customer_id from t_Customer where Customer_Account='{0}'", lblUser.Text);
+                SqlDataReader sdr = sh.QueryOperation(sql);
+                int customerid = -1;
+                if (sdr.HasRows)
+                {
+                    sdr.Read();
+                    customerid = sdr.GetInt32(0);
+                }
+                sdr.Close();//关闭SqlDataReader对象
 
-            string sql2 = string.Format("insert into t_CustomerAddress values({0},'{1}')", customerid, TextBox1.Text);
-            sh.ExeNonQuery(sql2);
-            string sql3 = string.Format("select * from t_CustomerAddress where Customer_id='{0}'", customerid);
-            SqlDataReader sdr2 = sh.QueryOperation(sql3);
-            ddlAddress.DataSource = sdr2;
-            ddlAddress.DataBind();
-            sdr2.Close();//关闭SqlDataReader对象
-            sh.closeConn();
+                string sql2 = string.Format("insert into t_CustomerAddress values({0},'{1}')", customerid, TextBox1.Text);
+                sh.ExeNonQuery(sql2);
+                string sql3 = string.Format("select * from t_CustomerAddress where Customer_id='{0}'", customerid);
+                SqlDataReader sdr2 = sh.QueryOperation(sql3);
+                ddlAddress.DataSource = sdr2;
+                ddlAddress.DataBind();
+                sdr2.Close();//关闭SqlDataReader对象
+                sh.closeConn();
+            }
+            else
+            {
+                Response.Write("<script>alert('请填写内容！')</script>");
+            }
         }
         catch (Exception)
         {
@@ -106,7 +109,9 @@ public partial class Shop_Order : System.Web.UI.Page
             {
                 int WareID = Convert.ToInt32(gvInfo.Rows[i].Cells[0].Text);
                 float qty = Convert.ToInt32(gvInfo.Rows[i].Cells[4].Text);
-                string sql3 = string.Format("insert into T_ShoppingCart values({0},{1},{2},{3})", customerid, WareID, qty, OrderID);
+                float Wprice = Convert.ToInt32(gvInfo.Rows[i].Cells[3].Text);
+                float Wsum = Wprice * qty;
+                string sql3 = string.Format("insert into T_ShoppingCart values({0},{1},{2},{3},{4})", customerid, WareID, qty, Wsum, OrderID);
                 cmd.CommandText = sql3;
                 cmd.ExecuteNonQuery();
             }
