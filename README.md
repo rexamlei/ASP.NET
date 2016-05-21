@@ -12,6 +12,7 @@ ShoppingCart2...购物车页<br>
 Order...........订单页面<br>
 ProDataList.....带输入参数和输出参数实例<br>
 DataListPaging..分页实例<br> 
+image ..........网站所需图片素材<br>
 ##### _________________________________________
 可能会尝试下面的命令把当前分支代码上传到master分支上。<br>
 $ git push -u origin master<br>
