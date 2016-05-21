@@ -4,7 +4,7 @@
 Welcome to my ASP.NET project, here is an electronic mall B2C project source code page.
 
 ### 代码说明
-Smart.sql.......数据库导入文件，注意最后的存储过程要另外创建<br>
+Smart.sql.......数据库导入文件,2016/5/21号有修改，请重新导入数据库<br>
 SqlHelper.cs....数据库助手类<br>
 CheckCode.cs....验证码生成类<br>
 WareListView....商品展示页面<br>
