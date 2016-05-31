@@ -279,8 +279,8 @@ IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo
 ALTER TABLE [dbo].[T_ShoppingCart]  WITH CHECK ADD  CONSTRAINT [FK__T_Shoppin__Order__182C9B23] FOREIGN KEY([Order_ID])
 REFERENCES [dbo].[T_Order] ([Order_ID])
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level2__Level2__145C0A3F]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level2]'))
-ALTER TABLE [dbo].[T_Level2]  WITH CHECK ADD FOREIGN KEY([Level2_ID])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK__T_Level2__Level1__145C0A3F]') AND parent_object_id = OBJECT_ID(N'[dbo].[T_Level2]'))
+ALTER TABLE [dbo].[T_Level2]  WITH CHECK ADD FOREIGN KEY([Level1_ID])
 REFERENCES [dbo].[T_Level1] ([Level1_ID])
 
 insert into T_Level1 values('家用电器','1')
