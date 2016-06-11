@@ -283,6 +283,13 @@ IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo
 ALTER TABLE [dbo].[T_Level2]  WITH CHECK ADD FOREIGN KEY([Level1_ID])
 REFERENCES [dbo].[T_Level1] ([Level1_ID])
 
+--视图
+create View v_Level1_b2
+as 
+select a.Level2_ID,a.Level1_ID,b.Level1_Name,a.Level2_Name
+from T_Level2 a inner join T_Level1 b
+on a.Level1_ID=b.Level1_ID
+
 insert into T_Level1 values('家用电器','1')
 insert into T_Level2 values('生活电器','1','1')
 insert into T_Level3 values('机器人','1','1','1')
