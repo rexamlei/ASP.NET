@@ -86,7 +86,7 @@ public partial class Admin_AddItem : System.Web.UI.Page
         {
             sh.ExeNonQuery(string.Format("insert into T_DetailsType values('{0}','{1}','{2}')", TxtTableName.Text, TxtTypeName.Text,""));
             //创建详细类型表
-            string createTableStr = "Create Table " + TxtTableName.Text + "(IID int primary key identity(1,1),";
+            string createTableStr = "Create Table  " + TxtTableName.Text + "(IID int primary key identity(1,1),";
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
                 TextBox tb = (TextBox)GridView1.Rows[i].Cells[2].FindControl("TextBox5");
