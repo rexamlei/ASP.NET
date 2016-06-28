@@ -53,7 +53,7 @@ public class SqlHelper
         return true;
     }
     public void closeConn() {
-        if (con.State == ConnectionState.Closed)
+        if (con.State == ConnectionState.Open)
             con.Close();
     }
         public void closeReader()
